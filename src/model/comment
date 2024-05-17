@@ -1,0 +1,59 @@
+import { Model, DataTypes } from 'sequelize';
+import dbconn from '../data/dbcon'; // Ensure correct path to the dbconn file
+
+class YouTubeComment extends Model {
+  public id!: string;
+  public videoId!: string;
+  public text!: string;
+  public authorName!: string;
+  public authorChannelId!: string;
+  public likeCount!: number;
+  public publishedAt!: Date;
+  public updatedAt!: Date;
+}
+
+YouTubeComment.init(
+  {
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    videoId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    authorName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    authorChannelId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    likeCount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    publishedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize: dbconn,
+    modelName: 'YouTubeComment',
+    tableName: 'youtube_comments',
+    timestamps: true,  // Set to true if you want Sequelize to handle createdAt and updatedAt
+  }
+);
+
+export default YouTubeComment;
